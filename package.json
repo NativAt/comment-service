@@ -1,0 +1,44 @@
+{
+  "name": "comments-srv",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha",
+    "start": "nodemon app.js",
+    "lint": "eslint --ignore-path .gitignore ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NativAt/comments-srv.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/NativAt/comments-srv/issues"
+  },
+  "homepage": "https://github.com/NativAt/comments-srv#readme",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "chai-as-promised": "^7.1.1",
+    "co": "^4.6.0",
+    "compression": "^1.7.2",
+    "cors": "^2.8.4",
+    "eslint": "^4.19.1",
+    "express": "^4.16.3",
+    "joi": "^13.3.0",
+    "mongodb": "^3.1.1",
+    "mongoose": "^5.2.1",
+    "pg": "^7.4.3",
+    "sequelize": "^4.38.0",
+    "sequelize-cli": "^4.0.0"
+  },
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "chai-http": "^4.0.0",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-import": "^2.11.0",
+    "mocha": "^5.2.0",
+    "sinon": "^5.0.10"
+  }
+}

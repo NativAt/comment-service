@@ -1,0 +1,36 @@
+const express = require('express');
+const bodyParser = require('body-parser');
+
+const app = express();
+const cors = require('cors');
+const compression = require('compression');
+
+app.use(compression());
+
+const commentsService = require('./routes/comments');
+
+
+app.use(bodyParser.json());
+app.use(cors());
+
+const errorHandler = (err, req, res, next) => {
+  return res.status(500).json({ error: `Internal server error: ${err}` });
+};
+
+process.on('unhandledRejection', (reason, promise) => {
+  console.error('Unhandled rejection', { reason, promise });
+});
+
+process.on('uncaughtException', (err) => {
+  console.log('whoops! There was an uncaught error', err);
+});
+
+const start = (db) => {
+  commentsService(app, db);
+  const server = app.listen(8080, () => console.log('server is listening on port 8080!'));
+  app.use(errorHandler);
+  return server;
+};
+
+
+module.exports = start;
