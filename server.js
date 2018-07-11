@@ -7,7 +7,8 @@ const compression = require('compression');
 
 app.use(compression());
 
-const commentsService = require('./routes/comments');
+const commentsRoute = require('./routes/comments');
+const commentService = require('./services/comments');
 
 
 app.use(bodyParser.json());
@@ -26,7 +27,7 @@ process.on('uncaughtException', (err) => {
 });
 
 const start = (db) => {
-  commentsService(app, db);
+  commentsRoute(app, commentService(db));
   const server = app.listen(8080, () => console.log('server is listening on port 8080!'));
   app.use(errorHandler);
   return server;

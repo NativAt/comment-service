@@ -1,10 +1,25 @@
-const repository = (db) => {
-  // get collection
-  const collection = db.collection('comments');
+/*
+  service layer
+*/
 
-  const getComments = (query) => {
+// require business logic
+const utils = require('../domain/getMaxLength');
+
+const repository = (db) => {
+  const getComments = async (filter) => {
     try {
-      return collection.find(query).sort({ createdAt: -1 }).toArray();
+      const query = filter ? { email: new RegExp(`.*${filter}.*`, 'i') } : {};
+      return db.find(query || {}, 'createdAt', 'desc');
+    } catch (err) {
+      throw err;
+    }
+  };
+
+  const getTopComments = async () => {
+    try {
+      const comments = await db.find({});
+      const topComment = utils.getMaxLength(comments);
+      return topComment;
     } catch (err) {
       throw err;
     }
@@ -12,9 +27,11 @@ const repository = (db) => {
 
   const createComment = async (email, message, image) => {
     try {
-      const Comment = collection;
-      const newComment = new Comment({ email, message, image });
-      return newComment.save();
+      return db.create({
+        email,
+        message,
+        image,
+      });
     } catch (err) {
       throw err;
     }
@@ -22,6 +39,7 @@ const repository = (db) => {
 
   return {
     getComments,
+    getTopComments,
     createComment,
   };
 };

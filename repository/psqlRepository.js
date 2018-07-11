@@ -26,7 +26,7 @@ const PsqlRepository = (model, collectionName) => {
         order: [[orderBy, order]],
       });
     }
-    // return this.collection.find(item);
+    return this.collection.findAll();
   };
 
   const findOne = (item) => {

@@ -1,3 +1,7 @@
+/*
+  business logic layer
+*/
+
 exports.getMaxLength = (strings) => {
   try {
     let maxString = {};
